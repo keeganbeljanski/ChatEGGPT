@@ -9,11 +9,19 @@
         #chat-container { width: 50%; max-width: 600px; background: #444654; padding: 20px; border-radius: 10px; margin-top: 50px; }
         #messages { height: 400px; overflow-y: auto; }
         .message { padding: 10px; margin: 5px 0; border-radius: 5px; }
-        .user { background: #0A84FF; align-self: flex-end; }
-        .bot { background: #4E4F50; }
+        .user { background: #4E4F50; align-self: flex-end; }
+        .bot { background: #444654; }
         #input-container { display: flex; margin-top: 10px; }
-        #user-input { flex-grow: 1; padding: 10px; border: none; border-radius: 5px; }
-        button { padding: 10px; background: #0A84FF; border: none; color: white; border-radius: 5px; cursor: pointer; }
+        #user-input { 
+            flex-grow: 1; 
+            padding: 10px; 
+            border: none; 
+            border-radius: 5px; 
+            background: #4E4F50; 
+            color: white; 
+            outline: none;
+        }
+        .button {background-color: #ffffff; border-radius: 8px;}
     </style>
     <link rel="icon" type="image/png" href="assets/favicon.png">
 </head>
@@ -22,77 +30,10 @@
         <div id="messages"></div>
         <div id="input-container">
             <input type="text" id="user-input" placeholder="Ask me anything...">
-            <button onclick="sendMessage()">Send</button>
+            <button onclick="sendMessage()" class="button"><img src = "assets/arrow.png" /></button>
         </div>
     </div>
     
-    <script>
-        document.getElementById("user-input").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                sendMessage();
-            }
-        });
-        
-        function sendMessage() {
-            const input = document.getElementById("user-input");
-            const message = input.value.trim();
-            if (!message) return;
-            
-            const messagesDiv = document.getElementById("messages");
-            
-            // Add user message
-            const userMessage = document.createElement("div");
-            userMessage.className = "message user";
-            userMessage.textContent = message;
-            messagesDiv.appendChild(userMessage);
-            
-            // Fake bot thinking delay
-            const botThinking = document.createElement("div");
-            botThinking.className = "message bot";
-            botThinking.textContent = "Thinking...";
-            messagesDiv.appendChild(botThinking);
-            
-            setTimeout(() => {
-                botThinking.remove(); // Remove "Thinking..."
-
-                // Fake bot response with progressive typing
-                const botMessage = document.createElement("div");
-                botMessage.className = "message bot";
-                messagesDiv.appendChild(botMessage);
-                
-                const responseText = "sure thing, I would be happy to provide some intellectual property"
-                let i = 0;
-                function typeText() {
-                    if (i < responseText.length) {
-                        botMessage.textContent += responseText.charAt(i);
-                        i++;
-                        setTimeout(typeText, 50); // Adjust typing speed here
-                    } else {
-                        const loadImage = document.createElement("img");
-                        loadImage.src = "assets/loading.gif"; // Change this to your actual image path
-                        loadImage.alt = "loading";
-                        loadImage.style.maxWidth = "10%"; // Ensures the image fits inside the chat
-                        messagesDiv.appendChild(loadImage);
-                        setTimeout(() => {
-                            // Append image after text response is fully typed
-                            loadImage.remove(); //remove loading image
-                            const botImage = document.createElement("img");
-                            botImage.src = "assets/favicon.png"; // Change this to your actual image path
-                            botImage.alt = "Egg";
-                            botImage.style.maxWidth = "100%"; // Ensures the image fits inside the chat
-                            messagesDiv.appendChild(botImage);
-                        }, 1000);
-                    }
-                }
-                typeText();
-                
-                // Scroll to bottom
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            }, 1000); // 1 second delay
-            
-            // Clear input
-            input.value = "";
-        }
-    </script>
+    <script src="ChatEggPT.js"></script>
 </body>
 </html>
