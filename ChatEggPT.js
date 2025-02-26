@@ -81,6 +81,9 @@ function selectPicture(userMessage) {
     else if (userMessage.includes("hot")){
         assetPath = assetPath + "soft_boiled.png"
     }
+    else if (userMessage.includes("food")){
+        assetPath = assetPath + "cheggsteak.png"
+    }
     else{
         assetPath = assetPath + pictureSelect + ".png"
     }
