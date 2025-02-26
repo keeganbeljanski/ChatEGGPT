@@ -49,7 +49,7 @@ function sendMessage() {
                     // Append image after text response is fully typed
                     loadImage.remove(); //remove loading image
                     const botImage = document.createElement("img");
-                    botImage.src = selectPicture(pictureArray); 
+                    botImage.src = selectPicture(); 
                     botImage.alt = "Egg";
                     botImage.style.maxWidth = "100%"; // Ensures the image fits inside the chat
                     messagesDiv.appendChild(botImage);
